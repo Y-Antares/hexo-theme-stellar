@@ -30,6 +30,12 @@ if hexo-config('style.font-family.codeblock')
 if hexo-config('style.font-family.logo')
   $ff-logo = convert(hexo-config('style.font-family.logo'))
 
+// font selection
+@font-face
+   font-family: 'ShangguSerif-Medium'
+   src: url('/font/ShangguSerif-Medium.woff2')
+   font-weight: normal
+   font-style: normal
 
 // font size
 $fs-root = convert(hexo-config('style.font-size.root'))
@@ -99,6 +105,17 @@ $border-button = 4px
   div.tag-plugin,p>img
     margin-top: 2.4rem
     margin-bottom: 2.4rem
+
+// =========================================
+// Custom Image Caption Style for Stellar Theme
+// (为Stellar主题定制的“图片下方文字自动变为图注格式”)
+// =========================================
+.l_main p:has(img) + p {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+  font-size: 0.9em;
+}
 
 // shadow
 $boxshadow-card = 0 1px 2px 0px rgba(0, 0, 0, 0.1)

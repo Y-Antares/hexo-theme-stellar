@@ -1,3 +1,7 @@
+---
+layout: post
+---
+
 # Stellar - 每个人的独立博客
 
 Stellar 是一个内置文档系统的简约商务风 Hexo 主题，支持丰富的标签和动态数据组件，请配合 [文档](https://xaoxuu.com/wiki/stellar/) 使用。

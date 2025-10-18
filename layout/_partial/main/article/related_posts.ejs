@@ -2,11 +2,24 @@
 function layoutDiv() {
   if (theme.article.related_posts.enable) {
     var el = '';
-    el += `<div class="related-wrap${scrollreveal(' ')}" id="related-posts">`
-    el += popular_posts_wrapper({
-      title: theme.article.related_posts.title || __('meta.related_posts'),
-      json: popular_posts_json({ maxCount: theme.article.related_posts.max_count , ulClass: 'related-posts' , PPMixingRate: 0.2 , isImage: true , isExcerpt: true} , page )
-    });
+    el += `<div class="related-wrap${scrollreveal(' ')}" id="related-posts">`;
+    
+    // 检查 page.tags 是否存在且是一个对象且有 each 方法
+    if (page.tags && typeof page.tags.each === 'function' && page.tags.length > 0) {
+      el += popular_posts_wrapper({
+        title: theme.article.related_posts.title || __('meta.related_posts'),
+        json: popular_posts_json({ maxCount: theme.article.related_posts.max_count, ulClass: 'related-posts', PPMixingRate: 0.2, isImage: true, isExcerpt: true}, page)
+      });
+    } else {
+      // 如果没有标签，显示暂无相关文章的信息
+      el += `<div class="article-meta mb-3">
+              <h2 class="article-title">${theme.article.related_posts.title || __('meta.related_posts')}</h2>
+              <div class="article-meta">
+                <p class="empty-placeholder">暂无相关文章</p>
+              </div>
+            </div>`;
+    }
+    
     el += '</div>';
     return el;
   }

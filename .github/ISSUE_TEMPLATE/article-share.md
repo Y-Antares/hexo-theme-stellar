@@ -4,8 +4,8 @@ about: 投稿文章到「Stellar 探索号」
 title: '[分享] '
 labels: '分享'
 assignees: ''
+layout: post
 ---
-
 <!-- 请在下方填充[标题]和(链接) -->
 
 **[]()**
