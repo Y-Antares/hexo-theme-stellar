@@ -37,23 +37,23 @@ menubar:
     - id: post
       theme: '#1BCDFC'
       icon: solar:documents-bold-duotone
-      title: 博客
+      title: 博客文章
       url: /
-    - id: wiki
+    - id: runningpage
       theme: '#3DC550'
+      icon: solar:planet-bold-duotone
+      title: 跑步记录
+      url: https://run.yantares.cn 
+    - id: explore
+      theme: '#FA6400'
       icon: solar:notebook-bookmark-bold-duotone
-      title: 文档
-      url: /wiki/
-    # - id: explore
-    #   theme: '#FA6400'
-    #   icon: solar:planet-bold-duotone
-    #   title: 探索
-    #   url: /explore/
-    # - id: social
-    #   theme: '#F44336'
-    #   icon: solar:chat-square-like-bold-duotone
-    #   title: 社交
-    #   url: /friends/
+      title: 提问（不对外开放）
+      url: https://poll.yantares.cn 
+    - id: social
+      theme: '#F44336'
+      icon: solar:chat-square-like-bold-duotone
+      title: 社交
+      url: /friends/
 
 
 ######## Main ########
@@ -169,7 +169,7 @@ article:
   # 文章类型，决定布局风格，可以在 front-matter/topic/wiki 中覆盖此参数
   type: tech # tech: 默认技术类文章, story: 图文类文章，文字和段落间增距大
   # 缩进两个文字宽度，适合文字类博客，可以在 front-matter/topic/wiki 中覆盖此参数
-  indent: # true / false
+  indent: true # / false
   # 如果没有指定封面，是否根据 tags 作为关键词搜索封面图片？
   auto_cover: false # search from https://source.unsplash.com/
   # 封面图宽高比
@@ -184,11 +184,12 @@ article:
   # 文章许可协议
   license: '本文采用 [署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议，转载请注明出处。'
   # 分享
-  share: # [wechat, weibo, email, link]
+  share: [wechat, weibo, email, link]
   # 相关文章，需要安装插件 (for layout: post)
   # npm i hexo-related-popular-posts
   related_posts:
-    enable: false
+    enable: true
+    title: 相关文章
     max_count: 5
 
 search:
@@ -207,8 +208,8 @@ search:
 
 ######## Comments ########
 comments:
-  service: # beaudar, utterances, giscus, twikoo, waline, artalk
-  comment_title: 快来参与讨论吧~
+  service: giscus # beaudar, utterances, giscus, twikoo, waline, artalk
+  comment_title: Comments
   lazyload: false # true / false
   # beaudar
   # https://beaudar.lipk.org/
@@ -235,18 +236,18 @@ comments:
   # https://giscus.app/zh-CN
   giscus:
     src: https://giscus.app/client.js
-    data-repo: xxx/xxx # [在此输入仓库]
-    data-repo-id: # [在此输入仓库 ID]
-    data-category: # [在此输入分类名]
-    data-category-id:
+    data-repo: Y-Antares/weblog
+    data-repo-id: R_kgDOM25iCg
+    data-category: Announcements
+    data-category-id: DIC_kwDOM25iCs4CoiwO
     data-mapping: pathname
     data-strict: 0
     data-reactions-enabled: 1
     data-emit-metadata: 0
-    data-input-position: top # top, bottom
-    data-theme: preferred_color_scheme
-    data-lang: zh-CN
-    data-loading: # lazy
+    data-input-position: top
+    data-theme: fro
+    data-lang: en
+    data-loading: lazy
     crossorigin: anonymous
 
   # Twikoo
@@ -310,39 +311,38 @@ comments:
 ######## Footer ########
 footer:
   social:
-    # github:
-    #   icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/>'
-    #   url: /
-    # music:
-    #   icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/>'
-    #   url: /
-    # unsplash:
-    #   icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3616429.svg"/>'
-    #   url: /
-    # comments:
-    #   icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/942ebbf1a4b91.svg"/>'
-    #   url: /about/#comments
-    # theme:
-    #   icon: default:theme
-    #   onclick: 'switchTheme()'
+    github:
+      icon: /images/github_icon.png
+      url: https://github.com/Y-Antares
+    music:
+      icon: /images/cloudmusic_icon.jpg
+      url: https://music.163.com/#/user/home?id=515374354
+    weixin:
+      icon: /images/wx_icon.png
+      url: /images/weixin.jpg
+    qq:
+      icon: /images/qq_icon.png
+      url: /images/qq.jpg
   sitemap:
-    # '博客':
-    #   - '[近期](/)'
-    #   - '[分类](/)'
-    #   - '[标签](/)'
-    #   - '[归档](/)'
-    # '项目':
-    #   - '[开源库](/)'
-    # '社交':
-    #   - '[友链](/)'
-    #   - '[留言板](/)'
-    # '更多':
-    #   - '[关于本站](/)'
-    #   - '[GitHub](/)'
+    '博客':
+      - '[近期](/)'
+      - '[分类](/categories/)'
+      - '[标签](/tags/)'
+      - '[归档](/archives/)'
+    '项目':
+      - '[跑步记录](https://run.yantares.cn)'
+    '社交':
+      - '[友链](/)'
+      - '[留言板](/)'
+    '更多':
+      - '[关于本站](/about/)'
+    
   content: | # 支持 Markdown 格式
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
     本站由 [{author.name}](/) 使用 [{theme.name} {theme.version}]({theme.tree}) 主题创建。
     本博客所有文章除特别声明外，均采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议，转载请注明出处。
-  # 主题用户越多，开发者维护和更新的积极性就越高，如果您喜欢本主题，请在适当的位置显示主题信息和仓库链接以表支持。
 
 
 ######## Tag Plugins ########
@@ -379,7 +379,7 @@ tag_plugins:
     default_color: theme # theme, accent, red, orange, yellow, green, cyan, blue, purple
   # {% image %}
   image:
-    fancybox: false # true, false
+    fancybox: true # true, false
   # {% copy xxx %}
   copy:
     toast: 复制成功
@@ -491,7 +491,7 @@ plugins:
   # lazyload
   # https://www.npmjs.com/package/vanilla-lazyload
   lazyload:
-    enable: true # [hexo clean && hexo s] is required after changing this value.
+    enable: false # [hexo clean && hexo s] is required after changing this value.
     js: https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js
     transition: fade # blur, fade
 
@@ -522,33 +522,13 @@ plugins:
     duration: 800 # ms
     interval: 100 # ms
     scale: 1 # 0.1~1
-  
-  # AI 摘要
-  # https://github.com/qxchuckle/Post-Summary-AI
-  tianli_gpt: 
-    enable: #true
-    js: https://jsd.onmicrosoft.cn/gh/qxchuckle/Post-Summary-AI@6.0/chuckle-post-ai.min.js
-    field: post # all, post, wiki
-    key: 5Q5mpqRK5DkwT1X9Gi5e # tianli_gpt key
-    total_length: 1000 # 设置提交的字数限制，默认为1000字，上限为5000，超过5000字符将被截断
-    typewriter: true # 打字机动画 
-    summary_directly: true # 是否直接显示摘要，否则显示 AI 简介
-    rec_method: all # all, web # 文章推荐方式，all：匹配数据库内所有文章进行推荐，web：仅当前站内的文章，默认all
-    hide_shuttle: true # 是否隐藏矩阵穿梭
-    summary_toggle: false
-    interface:
-      name: AI摘要
-      introduce: '我是文章辅助AI: QX-AI，点击下方的按钮，让我生成本文简介、推荐相关文章等。'
-      version: TianliGPT
-      button: ["介绍自己", "推荐文章", "生成摘要", "矩阵穿梭"]
-
 
   # Katex - The fastest math typesetting library for the web
   # https://katex.org/docs/autorender.html
   # https://github.com/KaTeX/KaTeX
   # 使用 hexo-renderer-markdown-it-plus 作为公式渲染器：npm uninstall hexo-renderer-marked --save npm install hexo-renderer-markdown-it-plus --save
   katex:
-    enable: #true # hexo-renderer-markdown-it-plus 默认开启 katex，此选项仅用于引入样式
+    enable: true # hexo-renderer-markdown-it-plus 默认开启 katex，此选项仅用于引入样式
     inject: |
       <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
   
@@ -556,7 +536,7 @@ plugins:
   # 需在Markdown文件开头加入mathjax: true
   # 推荐使用Pandoc: npm uninstall hexo-renderer-marked --save & npm install hexo-renderer-pandoc --save
   mathjax:
-    enable: # true # 可以在特定文章的 front-matter 中设置 mathjax: true 来开启，也可以在这里设置全局开启
+    enable: true # 可以在特定文章的 front-matter 中设置 mathjax: true 来开启，也可以在这里设置全局开启
     js: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
   # Mermaid - markdwon to flow chart, seq chart, class chart ...
@@ -601,8 +581,8 @@ style:
     code: 85% # 相较于其所在行的文本大小，建议用百分比
     codeblock: 0.8125rem # 13px
   font-family:
-    logo: 'system-ui, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif'
-    body: 'system-ui, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif'
+    logo: '"ShangguSerif-Medium", system-ui, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif'
+    body: '"ShangguSerif-Medium", system-ui, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif'
     code: 'Menlo, Monaco, Consolas, system-ui, "Courier New", monospace, sans-serif'
     codeblock: 'Menlo, Monaco, Consolas, system-ui, "Courier New", monospace, sans-serif'
   text-align: left
@@ -638,8 +618,7 @@ style:
   leftbar:
     # 可以设置：纯色/渐变色/图片作为背景
     # background: var(--leftbar-bg)
-    background-image: url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.13/image/sidebar-bg1@small.jpg)
-    blur-px: 100px
+    background-image: /images/A3.jpg
     blur-bg: var(--alpha60)
   paginator:
     prev: https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/arrow/f049bbd4e88ec.svg
