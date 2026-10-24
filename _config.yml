@@ -1,6 +1,6 @@
 ######## Stellar info ########
 stellar:
-  version: '1.33.1'
+  version: '1.29.1'
   homepage: 'https://xaoxuu.com/wiki/stellar/'
   repo: 'https://github.com/xaoxuu/hexo-theme-stellar'
   main_css: /css/main.css
@@ -10,7 +10,7 @@ stellar:
 ######## head tags ########
 preconnect:
   # - https://gcore.jsdelivr.net
-  # - https://gcore.jsdelivr.net
+  # - https://cdn.jsdelivr.net
   # - https://unpkg.com
 
 # 一旦设置源站地址，非源站地址将不会被SEO收录，并且访问时弹出提示
@@ -26,7 +26,6 @@ open_graph:
 
 structured_data:
   links: [] # your social links.
-
 
 ######## Sidebar ########
 # 左上角显示的 logo 区域，包含图标、大标题、副标题
@@ -54,11 +53,11 @@ menubar:
       icon: solar:planet-bold-duotone
       title: 跑步记录
       url: https://run.yantares.cn 
-    - id: explore
+    - id: map
       theme: '#FA6400'
       icon: solar:notebook-bookmark-bold-duotone
-      title: 提问（不对外开放）
-      url: https://poll.yantares.cn 
+      title: 足迹
+      url: /map/
     - id: social
       theme: '#F44336'
       icon: solar:chat-square-like-bold-duotone
@@ -73,13 +72,13 @@ site_tree:
   # 主页配置
   home:
     leftbar: welcome, recent
-    rightbar: 
+    rightbar: welcomeloc, tagcloud
   # 博客列表页配置
   index_blog:
     base_dir: blog # 只影响自动生成的页面路径
     menu_id: post # 未在 front-matter 中指定 menu_id 时，layout 为 post 的页面默认使用这里配置的 menu_id
     leftbar: welcome, recent # for categories/tags/archives
-    rightbar: 
+    rightbar: welcomeloc, tagcloud
     nav_tabs:  # 近期发布 分类 标签 专栏 归档 and ...
       # '朋友文章': /friends/rss/
   # 博客专栏列表页配置
@@ -99,7 +98,7 @@ site_tree:
   post:
     menu_id: post # 未在 front-matter 中指定 menu_id 时，layout 为 post 的页面默认使用这里配置的 menu_id
     leftbar: related, recent # for pages using 'layout:post'
-    rightbar: ghrepo, toc
+    rightbar: toc, welcomeloc
   # 博客专栏文章内页配置
   topic:
     menu_id: post
@@ -155,7 +154,7 @@ notebook:
   auto_excerpt: 128
   # 可以为某个 tag 设定图标（显示在标签树中）。
   tagcons:
-    '': solar:hashtag-square-bold
+    '': solar:hashtag-linear
   # 每页显示多少篇笔记。0 表示不分页，null 则 fallback 到 hexo 的配置。
   # 可以在笔记本 yaml 的 per_page 字段中覆盖此参数。
   per_page: null
@@ -179,11 +178,11 @@ article:
   # 文章类型，决定布局风格，可以在 front-matter/topic/wiki 中覆盖此参数
   type: tech # tech: 默认技术类文章, story: 图文类文章，文字和段落间增距大
   # 缩进两个文字宽度，适合文字类博客，可以在 front-matter/topic/wiki 中覆盖此参数
-  indent: # true / false
+  indent: true # / false
+  # 如果没有指定封面，是否根据 tags 作为关键词搜索封面图片？
+  auto_cover: false # search from https://source.unsplash.com/
   # 封面图宽高比
-  cover_ratio: 2
-  # 文章内横幅宽高比
-  banner_ratio: 2.5
+  cover_ratio: 2.4
   # 如果没有指定横幅，是否根据 tags 作为关键词搜索横幅图片？
   auto_banner: false # search from https://source.unsplash.com/
   # 如果没有指定 excerpt 和 description，将自动取多长的内容作为文章摘要？
@@ -218,10 +217,9 @@ search:
 
 ######## Comments ########
 comments:
-  service: giscus # beaudar, utterances, giscus, twikoo, waline, artalk
+  service: waline # beaudar, utterances, giscus, twikoo, waline, artalk
   comment_title: Comments
   lazyload: false # true / false
-  custom_css: # artalk,twikoo,... 可以为没有全局启用的评论加载自定义样式
   # beaudar
   # https://beaudar.lipk.org/
   beaudar:
@@ -264,17 +262,17 @@ comments:
   # Twikoo
   # https://twikoo.js.org/
   twikoo:
-    js: https://gcore.jsdelivr.net/npm/twikoo@1.6/dist/twikoo.all.min.js # 建议锁定版本
+    js: https://gcore.jsdelivr.net/npm/twikoo@1.6.8/dist/twikoo.all.min.js # 建议锁定版本
     envId: https://xxx # vercel函数
 
   # Waline
   # https://waline.js.org/
   waline:
-    js: https://gcore.jsdelivr.net/npm/@waline/client@3.1/dist/waline.js
-    css: https://gcore.jsdelivr.net/npm/@waline/client@3.1/dist/waline.css
-    meta_css: https://gcore.jsdelivr.net/npm/@waline/client@3.1/dist/waline-meta.css
+    js: https://gcore.jsdelivr.net/npm/@waline/client@3.1.3/dist/waline.js
+    css: https://gcore.jsdelivr.net/npm/@waline/client@3.1.3/dist/waline.css
+    meta_css: https://gcore.jsdelivr.net/npm/@waline/client@3.1.3/dist/waline-meta.css
     # Waline server address url, you should set this to your own link
-    serverURL: https://waline.vercel.app
+    serverURL: https://waline.yantares.cn
     # If false, comment count will only be displayed in post page, not in home page
     commentCount: true
     # Pageviews count, Note: You should not enable both `waline.pageview` and `leancloud_visitors`.
@@ -309,7 +307,7 @@ comments:
     #   token: # 图床验证
     #   resp: # 图片地址返回值的字段
 
-  # Artalk
+ # Artalk
   # https://artalk.js.org/
   artalk:
     css: https://unpkg.com/artalk@2.9/dist/artalk.css
@@ -334,7 +332,7 @@ footer:
       icon: /images/github_icon.png
       url: https://github.com/Y-Antares
     music:
-      icon: /images/cloudmusic_icon.jpg
+      icon: /images/cloudmusic_icon.png
       url: https://music.163.com/#/user/home?id=515374354
     weixin:
       icon: /images/wx_icon.png
@@ -343,22 +341,51 @@ footer:
       icon: /images/qq_icon.png
       url: /images/qq.jpg
   sitemap:
-    '博客':
+    - title: '博客'
+      items:
       - '[近期](/)'
       - '[分类](/categories/)'
       - '[标签](/tags/)'
       - '[归档](/archives/)'
-    '项目':
+    - title: '项目'
+      items:
       - '[跑步记录](https://run.yantares.cn)'
-    '社交':
+    - title: '社交'
+      items:
       - '[友链](/)'
       - '[留言板](/)'
-    '更多':
+    - title: '更多'
+      items:
       - '[关于本站](/about/)'
     
   content: | # 支持 Markdown 格式
-    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次！</span>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="runtime_span"></span>
+    <script type="text/javascript">
+    function show_runtime() {
+        window.setTimeout("show_runtime()", 1000);
+        X = new Date("2024/02/04 17:00:00"); // 网站开始运行的日期和时间
+        Y = new Date(); // 当前日期和时间
+        T = (Y.getTime() - X.getTime()); // 网站运行的总毫秒数
+        M = 24 * 60 * 60 * 1000; // 一天的毫秒数
+        a = T / M; // 总天数
+        A = Math.floor(a); // 总天数的整数部分
+        b = (a - A) * 24; // 总小时数
+        B = Math.floor(b); // 总小时数的整数部分
+        c = (b - B) * 60; // 总分钟数
+        C = Math.floor((b - B) * 60); // 总分钟数的整数部分
+        D = Math.floor((c - C) * 60); // 总秒数
+        var spanElement = document.getElementById('runtime_span');
+        if (spanElement) {
+          spanElement.innerHTML = "⏱️本站已运行 <span class='runtime'>" + A + "天" + B + "小时" + C + "分" + D + "秒</span>";
+        }
+    }
+    show_runtime();
+    </script>
+
+    <img src="/images/logo.png" style="float: right; width: 60px; margin-left: 20px;">
 
     本站由 [{author.name}](/) 使用 [{theme.name} {theme.version}]({theme.tree}) 主题创建。
     本博客所有文章除特别声明外，均采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议，转载请注明出处。
@@ -384,12 +411,12 @@ tag_plugins:
       prefix: ph:seal-question-fill
   # {% emoji %}
   emoji:
-    default: https://gcore.jsdelivr.net/gh/cdn-x/emoticons@3.1/qq/{name}.gif
+    default: https://gcore.jsdelivr.net/gh/cdn-x/emoji/qq/{name}.gif
     twemoji: https://gcore.jsdelivr.net/gh/twitter/twemoji/assets/svg/{name}.svg
-    qq: https://gcore.jsdelivr.net/gh/cdn-x/emoticons@3.1/qq/{name}.gif
-    aru: https://gcore.jsdelivr.net/gh/cdn-x/emoticons@3.1/aru/{name}.gif
-    tieba: https://gcore.jsdelivr.net/gh/cdn-x/emoticons@3.1/tieba/{name}.png
-    blobcat: https://gcore.jsdelivr.net/gh/cdn-x/emoticons@3.1/blobcat/{name}.gif
+    qq: https://gcore.jsdelivr.net/gh/cdn-x/emoji/qq/{name}.gif
+    aru: https://gcore.jsdelivr.net/gh/cdn-x/emoji/aru-l/{name}.gif
+    tieba: https://gcore.jsdelivr.net/gh/cdn-x/emoji/tieba/{name}.png
+    blobcat: https://gcore.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs/{name}.png
   icon:
     # 留空时，图标和文字颜色相同
     default_color: accent # theme, accent, red, orange, yellow, green, cyan, blue, purple
@@ -411,7 +438,7 @@ tag_plugins:
   # {% hashtag %}
   hashtag:
     default_color: # red, orange, yellow, green, cyan, blue, purple
-  # {% okr o1 percent:50 status:in_track/at_risk/off_track/finished/unfinished %}
+  # {% okr o1 percent:0.5 status:normal %}
   okr:
     border: true # 是否显示边框
     status: # 可以自行增加
@@ -511,26 +538,33 @@ data_services:
 
 
 # 扩展插件接入方法：(插件名下面用 #plugin# 代替)
-# 1. 在这里增加 #plugin# 配置，至少应含有 enable 字段，默认为空（不启用）
+# 1. 在这里增加 #plugin# 配置，至少赢含有 enable 字段，默认为空（不启用）
 # 2. 新建文件 layout/_plugins/#plugin#.ejs 文件中设置编写加载代码。
 # 2.1. 在该文件中可以直接使用 conf 来读取用户在【步骤 1】填写的配置字段内容
 # 2.2. 如果需要引入 css 或 js，可以使用 utils.css(xxx)、utils.js(xxx)，具体可参考 layout/_plugins/fancybox.ejs
 # 2.3. 如果需要本地 js 文件，请放入 /source/js/plugins 文件夹中，引入方式为：utils.js('/js/plugins/xxx.js');
 # 3. 如果这个插件只需要引入外部文件，可以在【步骤 1】处增加 inject 字段，而无需进入【步骤 2】创建 ejs，参考 katex
 plugins:
-
   # preload
   preload:
     enable: true
     service: flying_pages # flying_pages
-    flying_pages: https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js
+    flying_pages: https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js
+
+  # lazyload
+  # https://www.npmjs.com/package/vanilla-lazyload
+  lazyload:
+    enable: false # [hexo clean && hexo s] is required after changing this value.
+    js: https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js
+    transition: fade # blur, fade
 
   # https://fancyapps.com/docs/ui/fancybox/
   # available for {% image xxx %}
   fancybox:
     enable: true
-    js: https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js
-    css: https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css
+    loader: /js/plugins/fancybox-loader.js
+    js: https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js
+    css: https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css
     # 让 md 语法图片支持放大可以这样写: .md-text img:not([class]), .md-text .image img
     # 可以处理评论区的图片（不支持 iframe 类评论系统）例如：
     # 使用 twikoo 评论可以写: .tk-content img:not([class*="emo"])
@@ -540,15 +574,15 @@ plugins:
   # swiper
   swiper:
     enable: true
-    css: https://unpkg.com/swiper@10.3/swiper-bundle.min.css
-    js: https://unpkg.com/swiper@10.3/swiper-bundle.min.js
+    css: https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css
+    js: https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js
 
   # https://scrollrevealjs.org/api/reveal.html
   scrollreveal:
-    enable: #true # 慎用，有些时候打开页面空白
-    js: https://gcore.jsdelivr.net/npm/scrollreveal@4.0/dist/scrollreveal.min.js
-    distance: 8px
-    duration: 1000 # ms
+    enable: #true
+    js: https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js
+    distance: 16px
+    duration: 800 # ms
     interval: 100 # ms
     scale: 1 # 0.1~1
 
@@ -559,8 +593,8 @@ plugins:
   katex:
     enable: true # hexo-renderer-markdown-it-plus 默认开启 katex，此选项仅用于引入样式
     inject: |
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/katex.min.css" integrity="sha384-//SZkxyB7axjCAopkAL1E1rve+ZSPKapD89Lo/lLhcsXR+zOYl5z6zJZEFXil+q0" crossorigin="anonymous">
-
+      <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  
   # MathJax
   # 需在Markdown文件开头加入mathjax: true
   # 推荐使用Pandoc: npm uninstall hexo-renderer-marked --save & npm install hexo-renderer-pandoc --save
@@ -579,10 +613,10 @@ plugins:
   #   B -->|option 2| C(Section C)
   # ```
   mermaid:
-    enable: # true # 可以在特定文章的 front-matter 中设置 mermaid: true 来开启，也可以在这里设置全局开启
+    enable: true # true # 可以在特定文章的 front-matter 中设置 mermaid: true 来开启，也可以在这里设置全局开启
     style_optimization: false # use custom style in stellar
     # js: https://unpkg.com/mermaid@9.0.0/dist/mermaid.min.js
-    js: https://gcore.jsdelivr.net/npm/mermaid@v9/dist/mermaid.min.js
+    js: https://cdn.jsdelivr.net/npm/mermaid@v9/dist/mermaid.min.js
     # Available themes: default | dark | forest | neutral
     theme: neutral
   
@@ -597,9 +631,43 @@ plugins:
   # https://github.com/sivan/heti
   heti:
     enable: false # 此插件会和代码块冲突，仅适用于纯中文博主。
-    css: https://unpkg.com/heti@0.9/umd/heti.min.css
-    js: https://unpkg.com/heti@0.9/umd/heti-addon.min.js
+    css: https://unpkg.com/heti@0.9.2/umd/heti.min.css
+    js: https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js
 
+  # markdown_it_plus 语法渲染插件选项
+  markdown_it_plus:
+      plugins:
+          # Obsidian Callouts
+          - plugin:
+              name: mdit-plugin-callouts
+              enable: true
+              options:
+                  # this is plugin option
+
+  callout_blocks:
+    enable: true
+    inject: |
+      <link rel="stylesheet" href="/css/callout_blocks.css">
+
+  link-icon:
+    enable: true
+    inject: |
+      <script src="/js/plugins/link-icon.js"></script>
+
+  random:
+    enable: true
+    inject: |
+      <script src="/js/random.js"></script>
+  
+  txmap_widget:
+    enable: true
+    inject: |
+      <script data-pjax src="/js/services/txmap.js"></script>
+
+  custom_tag_color:
+    enable: true
+    inject: |
+      <link rel="stylesheet" href="/css/tagcolor-switch.css">
 
 
 style:
@@ -645,7 +713,7 @@ style:
   leftbar:
     # 可以设置：纯色/渐变色/图片作为背景
     background-color: var(--card) # var(--block)
-    background-image: url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.13/image/sidebar-bg1@small.jpg)
+    background-image: /imgs/A3.jpg
     blur-px: 100px
     blur-bg: var(--bg-a60)
     background-opacity: 0.8
@@ -654,7 +722,7 @@ style:
     next: https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/arrow/064b95430caf4.svg
   error_page: https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/404/1c830bfcd517d.svg
   site: # 使用 background-image 后，blur 设置才有效
-    # background-image: url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.14/image/site-bg1@small.webp)
+    background-image: /imgs/background.jpg
     blur-px: 100px
     blur-bg: var(--bg-a75)
     blur-sat: 300%
@@ -664,7 +732,6 @@ style:
     h3: '='
     h4: '|'
     h5: ':'
-
 
 default:
   avatar: https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg

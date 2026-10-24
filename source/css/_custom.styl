@@ -123,6 +123,31 @@ $border-button = 8px
   font-size: 0.9em;
 }
 
+.runtime
+{
+    font-weight: bold;
+    color: #7F84A7;
+}
+
+/* 选中文本：使用超链接高亮的背景色 */
+::selection {
+  background: var(--theme-link-opa);
+}
+
+.post-count {
+    scrollbar-width: none;
+    color: var(--text-p4);
+  }
+
+.totalcount {
+    color: var(--text-p4);
+  }
+
+#post-meta {
+  font-size: 12px;
+  color: var(--text-p4); /* 或 --text-p2，设置为灰色 */
+}
+
 // shadow
 $boxshadow-card = 0 1px 2px 0px rgba(0, 0, 0, 0.1)
 $boxshadow-float = 0 4px 8px 0px rgba(0, 0, 0, 0.1)

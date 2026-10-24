@@ -1,7 +1,6 @@
 # 您可以在这里创建属于自己的侧边栏组件库，在需要的位置放置自己的组件
 # layout即组件布局，支持自定义的有：
 # - markdown: 渲染 md 文本
-#
 
 ghrepo:
   layout: ghrepo
@@ -66,7 +65,7 @@ tagcloud:
 timeline:
   layout: timeline
   title: 近期动态
-  api: # https://api.github.com/repos/xaoxuu/hexo-theme-stellar/issues
+  api: https://memos.yantares.cn/api/v1/memos
   user: # 默认显示所有人的数据，设置名称可过滤为仅显示某人的数据，多个名称用英文逗号隔开，不要加空格
   limit: # 默认通过 api 上增加 per_page 来设置，如果是友链朋友圈，可通过这个设置数量
 
@@ -82,3 +81,15 @@ tagtree:
   expand_all: false # 是否展开所有节点
   expand_active: true # 是否展开当前节点
   show_tagcon: true # 是否显示标签 icon
+
+welcomeloc:
+  layout: markdown
+  title: '🎉 抓到你啦~'
+  linklist:
+    columns: 1
+    items:
+      - icon: '<img src="https://api.iconify.design/ion:dice-outline.svg"/>'
+        title: 随机文章
+        url: 'javascript:toRandomPost()'
+  content: |
+    <span id="welcome-info"></span>
